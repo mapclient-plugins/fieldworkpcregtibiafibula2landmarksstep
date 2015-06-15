@@ -1,6 +1,6 @@
 fieldworkpcregtibiafibual2landmarksstep
 ==================================
-MAP Client plugin for registering a fieldwork tibia+fibula mesh to landmark using a GIAS PCA model
+MAP Client plugin for registering a fieldwork tibia-fibula mesh to landmark using a GIAS PCA model
 
 Requires:
 GIAS: https://bitbucket.org/jangle/gias,
