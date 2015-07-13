@@ -61,7 +61,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditTT"/>
+       <widget class="QLineEdit" name="lineEditMM"/>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_4">
@@ -71,7 +71,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditMM"/>
+       <widget class="QLineEdit" name="lineEditTT"/>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_7">
@@ -95,8 +95,8 @@
  <tabstops>
   <tabstop>lineEdit0</tabstop>
   <tabstop>lineEditLM</tabstop>
-  <tabstop>lineEditTT</tabstop>
   <tabstop>lineEditMM</tabstop>
+  <tabstop>lineEditTT</tabstop>
   <tabstop>checkBoxGUI</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>

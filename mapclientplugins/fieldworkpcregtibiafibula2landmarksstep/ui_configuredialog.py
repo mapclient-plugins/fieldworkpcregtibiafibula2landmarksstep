@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/configuredialog.ui'
 #
-# Created: Mon Jun 15 14:07:50 2015
+# Created: Mon Jul 13 12:00:35 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -41,15 +41,15 @@ class Ui_Dialog(object):
         self.label_3 = QtGui.QLabel(self.configGroupBox)
         self.label_3.setObjectName("label_3")
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
-        self.lineEditTT = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEditTT.setObjectName("lineEditTT")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEditTT)
+        self.lineEditMM = QtGui.QLineEdit(self.configGroupBox)
+        self.lineEditMM.setObjectName("lineEditMM")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEditMM)
         self.label_4 = QtGui.QLabel(self.configGroupBox)
         self.label_4.setObjectName("label_4")
         self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_4)
-        self.lineEditMM = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEditMM.setObjectName("lineEditMM")
-        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.lineEditMM)
+        self.lineEditTT = QtGui.QLineEdit(self.configGroupBox)
+        self.lineEditTT.setObjectName("lineEditTT")
+        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.lineEditTT)
         self.label_7 = QtGui.QLabel(self.configGroupBox)
         self.label_7.setObjectName("label_7")
         self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_7)
@@ -64,9 +64,9 @@ class Ui_Dialog(object):
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         Dialog.setTabOrder(self.lineEdit0, self.lineEditLM)
-        Dialog.setTabOrder(self.lineEditLM, self.lineEditTT)
-        Dialog.setTabOrder(self.lineEditTT, self.lineEditMM)
-        Dialog.setTabOrder(self.lineEditMM, self.checkBoxGUI)
+        Dialog.setTabOrder(self.lineEditLM, self.lineEditMM)
+        Dialog.setTabOrder(self.lineEditMM, self.lineEditTT)
+        Dialog.setTabOrder(self.lineEditTT, self.checkBoxGUI)
         Dialog.setTabOrder(self.checkBoxGUI, self.buttonBox)
 
     def retranslateUi(self, Dialog):
