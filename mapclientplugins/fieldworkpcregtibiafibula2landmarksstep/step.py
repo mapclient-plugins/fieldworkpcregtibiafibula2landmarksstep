@@ -33,7 +33,7 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
     def __init__(self, location):
         super(FieldworkPCRegPelvis2LandmarksStep, self).__init__('Fieldwork PC-Reg Tibia-Fibula 2 Landmarks', location)
         self._configured = False # A step cannot be executed until it has been configured.
-        self._category = 'Anthropometry'
+        self._category = 'Registration'
         # Add any other initialisation code here:
         self._icon = QtGui.QImage(':/fieldworkpcregtibiafibula2landmarksstep/images/fieldworktibiafibulapcregicon.png')
         # Ports:
