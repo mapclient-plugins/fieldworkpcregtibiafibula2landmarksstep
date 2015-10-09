@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>687</height>
+    <width>1263</width>
+    <height>762</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -96,35 +96,75 @@
              <property name="fieldGrowthPolicy">
               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
              </property>
-             <item row="0" column="0">
+             <item row="2" column="0">
               <widget class="QLabel" name="label">
                <property name="text">
                 <string>Lat. Maleolus:</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="2" column="1">
               <widget class="QComboBox" name="comboBoxLM"/>
              </item>
-             <item row="1" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Med. Maleolus:</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
+             <item row="3" column="1">
               <widget class="QComboBox" name="comboBoxMM"/>
              </item>
-             <item row="2" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Tib. Tuberosity:</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="4" column="1">
               <widget class="QComboBox" name="comboBoxTT"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBoxMC"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBoxLC"/>
+             </item>
+             <item row="5" column="1">
+              <widget class="QComboBox" name="comboBoxKC"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Lat. Epicondyle:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Med. Epicondyle:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Knee Centre:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBoxMarkerOffset"/>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Marker Offset:</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -343,9 +383,13 @@
  </customwidgets>
  <tabstops>
   <tabstop>tableWidget</tabstop>
+  <tabstop>comboBoxLC</tabstop>
+  <tabstop>comboBoxMC</tabstop>
   <tabstop>comboBoxLM</tabstop>
   <tabstop>comboBoxMM</tabstop>
   <tabstop>comboBoxTT</tabstop>
+  <tabstop>comboBoxKC</tabstop>
+  <tabstop>doubleSpinBoxMarkerOffset</tabstop>
   <tabstop>regButton</tabstop>
   <tabstop>resetButton</tabstop>
   <tabstop>abortButton</tabstop>

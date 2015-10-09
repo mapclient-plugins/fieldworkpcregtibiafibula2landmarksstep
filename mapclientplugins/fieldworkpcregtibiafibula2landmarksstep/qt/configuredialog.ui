@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>545</width>
-    <height>240</height>
+    <height>384</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,6 +33,69 @@
       <property name="fieldGrowthPolicy">
        <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
       </property>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit0"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Medial Epicondyle:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEditMC"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Lateral Epicondyle:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEditLC"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Medial Maleolus:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEditMM"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Lateral Maleolus:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEditLM"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Tibial Tuberosity:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineEditTT"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Knee Centre:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineEditKC"/>
+      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label0">
         <property name="text">
@@ -40,47 +103,24 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit0"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>Lateral Maleolus</string>
+         <string>Marker Correction:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditLM"/>
+      <item row="7" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Medial Maleolus</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditMM"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Tibia Tuberosity</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditTT"/>
-      </item>
-      <item row="4" column="0">
+      <item row="8" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>GUI:</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="8" column="1">
        <widget class="QCheckBox" name="checkBoxGUI">
         <property name="text">
          <string/>
@@ -94,10 +134,12 @@
  </widget>
  <tabstops>
   <tabstop>lineEdit0</tabstop>
-  <tabstop>lineEditLM</tabstop>
+  <tabstop>lineEditMC</tabstop>
+  <tabstop>lineEditLC</tabstop>
   <tabstop>lineEditMM</tabstop>
+  <tabstop>lineEditLM</tabstop>
   <tabstop>lineEditTT</tabstop>
-  <tabstop>checkBoxGUI</tabstop>
+  <tabstop>lineEditKC</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>

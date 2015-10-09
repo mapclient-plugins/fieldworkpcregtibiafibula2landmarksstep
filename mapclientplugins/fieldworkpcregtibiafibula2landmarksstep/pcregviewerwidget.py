@@ -121,9 +121,12 @@ class MayaviPCRegViewerWidget(QDialog):
         self._ui.screenshotPixelXLineEdit.setValidator(QIntValidator())
         self._ui.screenshotPixelYLineEdit.setValidator(QIntValidator())
         for l in self._landmarkNames:
+            self._ui.comboBoxLC.addItem(l)
+            self._ui.comboBoxMC.addItem(l)
             self._ui.comboBoxLM.addItem(l)
             self._ui.comboBoxMM.addItem(l)
             self._ui.comboBoxTT.addItem(l)
+            self._ui.comboBoxKC.addItem(l)
 
     def _makeConnections(self):
         self._ui.tableWidget.itemClicked.connect(self._tableItemClicked)
@@ -140,8 +143,23 @@ class MayaviPCRegViewerWidget(QDialog):
         self._ui.comboBoxLM.activated.connect(self._updateConfigLM)
         self._ui.comboBoxMM.activated.connect(self._updateConfigMM)
         self._ui.comboBoxTT.activated.connect(self._updateConfigTT)
+        self._ui.comboBoxLC.activated.connect(self._updateConfigLC)
+        self._ui.comboBoxMC.activated.connect(self._updateConfigMC)
+        self._ui.comboBoxKC.activated.connect(self._updateConfigKC)
+
+        self._ui.doubleSpinBoxMarkerOffset.valueChanged.connect(self._updateMarkerOffset)
 
     def _initialiseSettings(self):
+        if self._config['LC'] in self._landmarkNames:
+            self._ui.comboBoxLC.setCurrentIndex(self._landmarkNames.index(self._config['LC']))
+        else:
+            self._ui.comboBoxLC.setCurrentIndex(0)
+
+        if self._config['MC'] in self._landmarkNames:
+            self._ui.comboBoxMC.setCurrentIndex(self._landmarkNames.index(self._config['MC']))
+        else:
+            self._ui.comboBoxMC.setCurrentIndex(0)
+
         if self._config['LM'] in self._landmarkNames:
             self._ui.comboBoxLM.setCurrentIndex(self._landmarkNames.index(self._config['LM']))
         else:
@@ -157,6 +175,12 @@ class MayaviPCRegViewerWidget(QDialog):
         else:
             self._ui.comboBoxTT.setCurrentIndex(0)
 
+        if self._config['kneecentre'] in self._landmarkNames:
+            self._ui.comboBoxKC.setCurrentIndex(self._landmarkNames.index(self._config['kneecentre']))
+        else:
+            self._ui.comboBoxKC.setCurrentIndex(0)
+
+        self._ui.doubleSpinBoxMarkerOffset.setValue(float(self._config['marker_offset']))
 
     def _initialiseObjectTable(self):
         self._ui.tableWidget.setRowCount(self._objects.getNumberOfObjects())
@@ -234,8 +258,20 @@ class MayaviPCRegViewerWidget(QDialog):
     def _updateConfigMM(self):
         self._config['MM'] = self._ui.comboBoxMM.currentText()
 
+    def _updateConfigLC(self):
+        self._config['LC'] = self._ui.comboBoxLC.currentText()
+
+    def _updateConfigMC(self):
+        self._config['MC'] = self._ui.comboBoxMC.currentText()
+
     def _updateConfigTT(self):
         self._config['TT'] = self._ui.comboBoxTT.currentText()
+
+    def _updateConfigKC(self):
+        self._config['kneecentre'] = self._ui.comboBoxKC.currentText()
+
+    def _updateMarkerOffset(self):
+        self._config['marker_offset'] = str(self._ui.doubleSpinBoxMarkerOffset.value())
 
     def _updateMeshGeometry(self, P):
         meshObj = self._objects.getObject('tibia-fibula mesh')
@@ -251,18 +287,26 @@ class MayaviPCRegViewerWidget(QDialog):
         self._regUnlockUI()
 
     def _regLockUI(self):
+        self._ui.comboBoxLC.setEnabled(False)
+        self._ui.comboBoxMC.setEnabled(False)
         self._ui.comboBoxLM.setEnabled(False)
         self._ui.comboBoxMM.setEnabled(False)
         self._ui.comboBoxTT.setEnabled(False)
+        self._ui.comboBoxKC.setEnabled(False)
+        self._ui.doubleSpinBoxMarkerOffset.setEnabled(False)
         self._ui.regButton.setEnabled(False)
         self._ui.resetButton.setEnabled(False)
         self._ui.acceptButton.setEnabled(False)
         self._ui.abortButton.setEnabled(False)
 
     def _regUnlockUI(self):
+        self._ui.comboBoxLC.setEnabled(True)
+        self._ui.comboBoxMC.setEnabled(True)
         self._ui.comboBoxLM.setEnabled(True)
         self._ui.comboBoxMM.setEnabled(True)
         self._ui.comboBoxTT.setEnabled(True)
+        self._ui.comboBoxKC.setEnabled(True)
+        self._ui.doubleSpinBoxMarkerOffset.setEnabled(True)
         self._ui.regButton.setEnabled(True)
         self._ui.resetButton.setEnabled(True)
         self._ui.acceptButton.setEnabled(True)

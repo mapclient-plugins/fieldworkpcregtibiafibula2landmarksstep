@@ -18,7 +18,7 @@ from mappluginutils.datatypes import transformations
 import numpy as np
 
 
-TIBFIBLANDMARKS = ('LM', 'MM', 'TT')
+TIBFIBLANDMARKS = ('LM', 'MM', 'TT', 'LC', 'MC', 'kneecentre')
 
 class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
     '''
@@ -28,7 +28,6 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
 
     _pcfitmw0 = 1e2
     _pcfitmwn = 1e2
-    _landmarkShift = 10.0
 
     def __init__(self, location):
         super(FieldworkPCRegPelvis2LandmarksStep, self).__init__('Fieldwork PC-Reg Tibia-Fibula 2 Landmarks', location)
@@ -59,6 +58,7 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
         self._config = {}
         self._config['identifier'] = ''
         self._config['GUI'] = 'True'
+        self._config['marker_offset'] = '10.0'
         for l in TIBFIBLANDMARKS:
             self._config[l] = 'none'
 
@@ -96,13 +96,29 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
         raise RuntimeError('Pelvis Landmark Registration Aborted')
 
     def _correctLandmarks(self):
-        # move landmarks closer to centre in anterior-posterior direction
-        centreAnkle = 0.5*(self._landmarks[self._config['LM']] + self._landmarks[self._config['MM']])
-        vMedialLateral = math.norm(self._landmarks[self._config['LM']] - self._landmarks[self._config['MM']])
-        vAntPost = math.norm(np.cross(vMedialLateral, self._landmarks[self._config['TT']]))
-        self._landmarks[self._config['LM']] -= self._landmarkShift*vMedialLateral
-        self._landmarks[self._config['MM']] += self._landmarkShift*vMedialLateral
-        self._landmarks[self._config['TT']] += self._landmarkShift*vAntPost
+        # move landmarks closer to centre in anterior-posterior directio
+        landmarkShift = float(self._config['marker_offset'])
+        if (self._config['LM']!='none') and (self._config['MM']!='none'):
+            centreAnkle = 0.5*(self._landmarks[self._config['LM']] + self._landmarks[self._config['MM']])
+            vMedialLateral = math.norm(self._landmarks[self._config['LM']] - self._landmarks[self._config['MM']])
+            self._landmarks[self._config['LM']] -= landmarkShift*vMedialLateral
+            self._landmarks[self._config['MM']] += landmarkShift*vMedialLateral
+
+            if self._config['TT']!='none':
+                vAntPost = math.norm(np.cross(vMedialLateral, self._landmarks[self._config['TT']]))
+                self._landmarks[self._config['TT']] += landmarkShift*vAntPost
+
+        if (self._config['LC']!='none') and (self._config['MC']!='none'):
+            print self._config['LC']
+            print self._config['MC']
+            centrePlat = 0.5*(self._landmarks[self._config['LC']] + self._landmarks[self._config['MC']])
+            vMedialLateral = math.norm(self._landmarks[self._config['LC']] - self._landmarks[self._config['MC']])
+            self._landmarks[self._config['LC']] -= landmarkShift*vMedialLateral
+            self._landmarks[self._config['MC']] += landmarkShift*vMedialLateral
+
+            if self._config['TT']!='none':
+                vAntPost = math.norm(np.cross(vMedialLateral, self._landmarks[self._config['TT']]))
+                self._landmarks[self._config['TT']] += landmarkShift*vAntPost
 
     def reg(self, callbackSignal=None):
 
@@ -204,6 +220,7 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
             conf.setValue('GUI', 'True')
         else:
             conf.setValue('GUI', 'False')
+        conf.setValue('marker_offset', self._config['marker_offset'])
         conf.endGroup()
 
     def deserialize(self, location):
@@ -218,12 +235,14 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
         conf.beginGroup('config')
         self._config['identifier'] = conf.value('identifier', '')
         for l in TIBFIBLANDMARKS:
-            self._config[l] = conf.value(l, l)
+            self._config[l] = str(conf.value(l, l))
+            if self._config[l]=='':
+                self._config[l] = 'none'
         if conf.value('GUI')=='True':
             self._config['GUI'] = True
         elif conf.value('GUI')=='False':
             self._config['GUI'] = False
-        # self._config['GUI'] = conf.value('GUI', True)
+        self._config['marker_offset'] = conf.value('marker_offset', '10.0')
         conf.endGroup()
 
         d = ConfigureDialog()
