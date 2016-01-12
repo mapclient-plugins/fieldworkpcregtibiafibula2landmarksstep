@@ -219,7 +219,7 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
         # for config from older versions
         if self._config['GUI']=='True':
             self._config['GUI'] = True
-        else:
+        elif self._config['GUI']=='False':
             self._config['GUI'] = False
 
         d = ConfigureDialog()
