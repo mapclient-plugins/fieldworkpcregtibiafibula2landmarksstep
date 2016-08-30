@@ -215,6 +215,18 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
         given by mapclient
         '''
         self._config.update(json.loads(string))
+        if len(self._config['LM'])==0:
+            self._config['LM'] = 'none'
+        if len(self._config['MM'])==0:
+            self._config['MM'] = 'none'
+        if len(self._config['TT'])==0:
+            self._config['TT'] = 'none'
+        if len(self._config['LC'])==0:
+            self._config['LC'] = 'none'
+        if len(self._config['MC'])==0:
+            self._config['MC'] = 'none'
+        if len(self._config['kneecentre'])==0:
+            self._config['kneecentre'] = 'none'
 
         # for config from older versions
         if self._config['GUI']=='True':

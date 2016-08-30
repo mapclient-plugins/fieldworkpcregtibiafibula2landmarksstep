@@ -74,11 +74,23 @@ class ConfigureDialog(QtGui.QDialog):
         config = {}
         config['identifier'] = self._ui.lineEdit0.text()
         config['LM'] = self._ui.lineEditLM.text()
+        if len(config['LM'])==0:
+            config['LM'] = 'none'
         config['MM'] = self._ui.lineEditMM.text()
+        if len(config['MM'])==0:
+            config['MM'] = 'none'
         config['TT'] = self._ui.lineEditTT.text()
+        if len(config['TT'])==0:
+            config['TT'] = 'none'
         config['LC'] = self._ui.lineEditLC.text()
+        if len(config['LC'])==0:
+            config['LC'] = 'none'
         config['MC'] = self._ui.lineEditMC.text()
+        if len(config['MC'])==0:
+            config['MC'] = 'none'
         config['kneecentre'] = self._ui.lineEditKC.text()
+        if len(config['kneecentre'])==0:
+            config['kneecentre'] = 'none'
         config['GUI'] = self._ui.checkBoxGUI.isChecked()
         config['marker_offset'] = str(self._ui.doubleSpinBox.value())
         return config
