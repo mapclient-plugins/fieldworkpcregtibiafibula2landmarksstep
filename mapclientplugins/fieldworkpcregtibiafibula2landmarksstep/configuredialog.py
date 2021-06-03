@@ -1,10 +1,9 @@
-
-
 from PySide2 import QtWidgets
 from mapclientplugins.fieldworkpcregtibiafibula2landmarksstep.ui_configuredialog import Ui_Dialog
 
 INVALID_STYLE_SHEET = 'background-color: rgba(239, 0, 0, 50)'
 DEFAULT_STYLE_SHEET = ''
+
 
 class ConfigureDialog(QtWidgets.QDialog):
     '''
@@ -16,7 +15,7 @@ class ConfigureDialog(QtWidgets.QDialog):
         Constructor
         '''
         QtWidgets.QDialog.__init__(self, parent)
-        
+
         self._ui = Ui_Dialog()
         self._ui.setupUi(self)
 
@@ -41,8 +40,9 @@ class ConfigureDialog(QtWidgets.QDialog):
         result = QtWidgets.QMessageBox.Yes
         if not self.validate():
             result = QtWidgets.QMessageBox.warning(self, 'Invalid Configuration',
-                'This configuration is invalid.  Unpredictable behaviour may result if you choose \'Yes\', are you sure you want to save this configuration?)',
-                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+                                                   'This configuration is invalid.  Unpredictable behaviour may result if you choose \'Yes\', are you sure you want to save this configuration?)',
+                                                   QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                                   QtWidgets.QMessageBox.No)
 
         if result == QtWidgets.QMessageBox.Yes:
             QtWidgets.QDialog.accept(self)
@@ -74,22 +74,22 @@ class ConfigureDialog(QtWidgets.QDialog):
         config = {}
         config['identifier'] = self._ui.lineEdit0.text()
         config['LM'] = self._ui.lineEditLM.text()
-        if len(config['LM'])==0:
+        if len(config['LM']) == 0:
             config['LM'] = 'none'
         config['MM'] = self._ui.lineEditMM.text()
-        if len(config['MM'])==0:
+        if len(config['MM']) == 0:
             config['MM'] = 'none'
         config['TT'] = self._ui.lineEditTT.text()
-        if len(config['TT'])==0:
+        if len(config['TT']) == 0:
             config['TT'] = 'none'
         config['LC'] = self._ui.lineEditLC.text()
-        if len(config['LC'])==0:
+        if len(config['LC']) == 0:
             config['LC'] = 'none'
         config['MC'] = self._ui.lineEditMC.text()
-        if len(config['MC'])==0:
+        if len(config['MC']) == 0:
             config['MC'] = 'none'
         config['kneecentre'] = self._ui.lineEditKC.text()
-        if len(config['kneecentre'])==0:
+        if len(config['kneecentre']) == 0:
             config['kneecentre'] = 'none'
         config['GUI'] = self._ui.checkBoxGUI.isChecked()
         config['marker_offset'] = str(self._ui.doubleSpinBox.value())
@@ -108,4 +108,3 @@ class ConfigureDialog(QtWidgets.QDialog):
         self._ui.lineEditTT.setText(config['TT'])
         self._ui.checkBoxGUI.setChecked(bool(config['GUI']))
         self._ui.doubleSpinBox.setValue(float(config['marker_offset']))
-
