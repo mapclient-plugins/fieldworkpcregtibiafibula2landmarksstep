@@ -6,7 +6,7 @@ import os
 import json
 import copy
 
-from PySide import QtGui
+from PySide2 import QtGui
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 from mapclientplugins.fieldworkpcregtibiafibula2landmarksstep.configuredialog import ConfigureDialog
