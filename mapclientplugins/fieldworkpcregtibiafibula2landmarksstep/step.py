@@ -233,7 +233,7 @@ class FieldworkPCRegPelvis2LandmarksStep(WorkflowStepMountPoint):
         elif self._config['GUI'] == 'False':
             self._config['GUI'] = False
 
-        d = ConfigureDialog(self._main_window)
+        d = ConfigureDialog()
         d.identifierOccursCount = self._identifierOccursCount
         d.setConfig(self._config)
         self._configured = d.validate()
