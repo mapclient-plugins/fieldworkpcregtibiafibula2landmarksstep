@@ -18,24 +18,25 @@ This file is part of MAP Client. (http://launchpad.net/mapclient)
     along with MAP Client.  If not, see <http://www.gnu.org/licenses/>..
 '''
 import os
+
 os.environ['ETS_TOOLKIT'] = 'qt4'
 
-from PySide.QtGui import QDialog, QFileDialog, QDialogButtonBox,\
-                         QAbstractItemView, QTableWidgetItem
-from PySide.QtGui import QDoubleValidator, QIntValidator
-from PySide.QtCore import Qt
-from PySide.QtCore import QThread, Signal
+from PySide2.QtWidgets import QDialog, QAbstractItemView, QTableWidgetItem
+from PySide2.QtGui import QIntValidator
+from PySide2.QtCore import Qt
+from PySide2.QtCore import QThread, Signal
 
 from mapclientplugins.fieldworkpcregtibiafibula2landmarksstep.ui_pcregviewerwidget import Ui_Dialog
 from traits.api import HasTraits, Instance, on_trait_change, \
     Int, Dict
 
-from gias2.mappluginutils.mayaviviewer import MayaviViewerObjectsContainer,\
-                                              MayaviViewerLandmark,\
-                                              MayaviViewerFieldworkModel,\
-                                              colours
+from gias2.mappluginutils.mayaviviewer import MayaviViewerObjectsContainer, \
+    MayaviViewerLandmark, \
+    MayaviViewerFieldworkModel, \
+    colours
 import numpy as np
 import copy
+
 
 class _ExecThread(QThread):
     finalUpdate = Signal(tuple)
@@ -49,16 +50,17 @@ class _ExecThread(QThread):
         output = self.func(self.update)
         self.finalUpdate.emit(output)
 
+
 class MayaviPCRegViewerWidget(QDialog):
     '''
     Configure dialog to present the user with the options to configure this step.
     '''
     defaultColor = colours['bone']
-    objectTableHeaderColumns = {'Visible':0}
-    backgroundColour = (0.0,0.0,0.0)
+    objectTableHeaderColumns = {'Visible': 0}
+    backgroundColour = (0.0, 0.0, 0.0)
     _modelRenderArgs = {}
-    _modelDisc = [10,10]
-    _landmarkRenderArgs = {'mode':'sphere', 'scale_factor':20.0, 'color':(0,1,0)}
+    _modelDisc = [10, 10]
+    _landmarkRenderArgs = {'mode': 'sphere', 'scale_factor': 20.0, 'color': (0, 1, 0)}
 
     def __init__(self, landmarks, model, config, regFunc, parent=None):
         '''
@@ -73,7 +75,7 @@ class MayaviPCRegViewerWidget(QDialog):
 
         self.selectedObjectName = None
         self._landmarks = landmarks
-        self._landmarkNames = ['none',]
+        self._landmarkNames = ['none', ]
         self._landmarkNames = self._landmarkNames + sorted(self._landmarks.keys())
         self._origModel = model
         self._regFunc = regFunc
@@ -116,7 +118,7 @@ class MayaviPCRegViewerWidget(QDialog):
                                                              renderArgs=self._landmarkRenderArgs
                                                              )
                                     )
-        
+
     def _setupGui(self):
         self._ui.screenshotPixelXLineEdit.setValidator(QIntValidator())
         self._ui.screenshotPixelYLineEdit.setValidator(QIntValidator())
@@ -132,7 +134,7 @@ class MayaviPCRegViewerWidget(QDialog):
         self._ui.tableWidget.itemClicked.connect(self._tableItemClicked)
         self._ui.tableWidget.itemChanged.connect(self._visibleBoxChanged)
         self._ui.screenshotSaveButton.clicked.connect(self._saveScreenShot)
-        
+
         self._ui.regButton.clicked.connect(self._worker.start)
         self._ui.regButton.clicked.connect(self._regLockUI)
 
@@ -188,7 +190,7 @@ class MayaviPCRegViewerWidget(QDialog):
         self._ui.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self._ui.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
         self._ui.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
-        
+
         r = 0
         # 'none' is first elem in self._landmarkNames, so skip that
         for ln in self._landmarkNames[1:]:
@@ -201,7 +203,7 @@ class MayaviPCRegViewerWidget(QDialog):
 
     def _addObjectToTable(self, row, name, obj, checked=True):
         typeName = obj.typeName
-        print('adding to table: %s (%s)'%(name, typeName))
+        print('adding to table: %s (%s)' % (name, typeName))
         tableItem = QTableWidgetItem(name)
         if checked:
             tableItem.setCheckState(Qt.Checked)
@@ -213,9 +215,9 @@ class MayaviPCRegViewerWidget(QDialog):
     def _tableItemClicked(self):
         selectedRow = self._ui.tableWidget.currentRow()
         self.selectedObjectName = self._ui.tableWidget.item(
-                                    selectedRow,
-                                    self.objectTableHeaderColumns['Visible']
-                                    ).text()
+            selectedRow,
+            self.objectTableHeaderColumns['Visible']
+        ).text()
         print(selectedRow)
         print(self.selectedObjectName)
 
@@ -224,10 +226,10 @@ class MayaviPCRegViewerWidget(QDialog):
         # name = self._getSelectedObjectName()
 
         # checked changed item is actually the checkbox
-        if tableItem.column()==self.objectTableHeaderColumns['Visible']:
+        if tableItem.column() == self.objectTableHeaderColumns['Visible']:
             # get visible status
             name = tableItem.text()
-            visible = tableItem.checkState().name=='Checked'
+            visible = tableItem.checkState().name == 'Checked'
 
             print('visibleboxchanged name', name)
             print('visibleboxchanged visible', visible)
@@ -275,7 +277,7 @@ class MayaviPCRegViewerWidget(QDialog):
 
     def _updateMeshGeometry(self, P):
         meshObj = self._objects.getObject('tibia-fibula mesh')
-        meshObj.updateGeometry(P.reshape((3,-1,1)), self._scene)
+        meshObj.updateGeometry(P.reshape((3, -1, 1)), self._scene)
 
     def _regUpdate(self, output):
         regModel, RMSE, T = output
@@ -343,7 +345,7 @@ class MayaviPCRegViewerWidget(QDialog):
         for r in range(self._ui.tableWidget.rowCount()):
             tableItem = self._ui.tableWidget.item(r, self.objectTableHeaderColumns['Visible'])
             name = tableItem.text()
-            visible = tableItem.checkState().name=='Checked'
+            visible = tableItem.checkState().name == 'Checked'
             obj = self._objects.getObject(name)
             print(obj.name)
             if obj.sceneObject:
@@ -357,9 +359,9 @@ class MayaviPCRegViewerWidget(QDialog):
         filename = self._ui.screenshotFilenameLineEdit.text()
         width = int(self._ui.screenshotPixelXLineEdit.text())
         height = int(self._ui.screenshotPixelYLineEdit.text())
-        self._scene.mlab.savefig( filename, size=( width, height ) )
+        self._scene.mlab.savefig(filename, size=(width, height))
 
-    #================================================================#
+    # ================================================================#
     @on_trait_change('scene.activated')
     def testPlot(self):
         # This function is called when the view is opened. We don't
@@ -370,7 +372,5 @@ class MayaviPCRegViewerWidget(QDialog):
         # We can do normal mlab calls on the embedded scene.
         self._scene.mlab.test_points3d()
 
-
     # def _saveImage_fired( self ):
     #     self.scene.mlab.savefig( str(self.saveImageFilename), size=( int(self.saveImageWidth), int(self.saveImageLength) ) )
-        
