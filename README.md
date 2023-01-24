@@ -4,4 +4,6 @@ MAP Client plugin for registering a fieldwork tibia-fibula mesh to landmark usin
 
 Requires
 --------
-- GIAS2: https://bitbucket.org/jangle/gias2
+- GIAS3 - Common: https://github.com/musculoskeletal/gias3.common
+- GIAS3 - Musculoskeletal: https://github.com/musculoskeletal/gias3.musculoskeletal
+- GIAS3 - MAP Client Plugin Utilities: https://github.com/musculoskeletal/gias3.mapclientpluginutilities

@@ -30,11 +30,8 @@ from mapclientplugins.fieldworkpcregtibiafibula2landmarksstep.ui_pcregviewerwidg
 from traits.api import HasTraits, Instance, on_trait_change, \
     Int, Dict
 
-from gias2.mappluginutils.mayaviviewer import MayaviViewerObjectsContainer, \
-    MayaviViewerLandmark, \
-    MayaviViewerFieldworkModel, \
-    colours
-import numpy as np
+from gias3.mapclientpluginutilities.viewers import MayaviViewerObjectsContainer, MayaviViewerLandmark, MayaviViewerFieldworkModel, colours
+
 import copy
 
 
@@ -108,14 +105,14 @@ class MayaviPCRegViewerWidget(QDialog):
                                 MayaviViewerFieldworkModel('tibia-fibula mesh',
                                                            copy.deepcopy(self._origModel),
                                                            self._modelDisc,
-                                                           renderArgs=self._modelRenderArgs
+                                                           render_args=self._modelRenderArgs
                                                            )
                                 )
         # 'none' is first elem in self._landmarkNames, so skip that
         for ln in self._landmarkNames[1:]:
             self._objects.addObject(ln, MayaviViewerLandmark(ln,
                                                              self._landmarks[ln],
-                                                             renderArgs=self._landmarkRenderArgs
+                                                             render_args=self._landmarkRenderArgs
                                                              )
                                     )
 
